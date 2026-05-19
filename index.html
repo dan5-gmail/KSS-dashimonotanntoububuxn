@@ -247,25 +247,23 @@
 
         function startMosaicMode(){
 
-            let scale = 8;
+         let blur = 25;
 
             interval = setInterval(() => {
 
-                image.style.transform =
-                    `scale(${scale})`;
+                image.style.filter = `blur(${blur}px)`;
 
-                scale -= 0.3;
+                blur -= 1;
 
-                if(scale <= 1){
+                if(blur <= 0){
 
-                    image.style.transform = "scale(1)";
+                    image.style.filter = "blur(0px)";
 
                     clearInterval(interval);
 
                     running = false;
                 }
-
-            }, 150);
+            }, 180);
         }
 
 

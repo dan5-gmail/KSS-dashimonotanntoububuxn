@@ -248,13 +248,13 @@
 
         function startMosaicMode(){
 
-         let blur = 25;
+         let blur = 30;
 
             interval = setInterval(() => {
 
                 image.style.filter = `blur(${blur}px)`;
 
-                blur -= 1;
+                blur -= 0.8;
 
                 if(blur <= 0){
 

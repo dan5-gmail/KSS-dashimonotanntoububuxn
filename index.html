@@ -124,6 +124,8 @@
 
         <img id="questionImage" src="q1.png">
 
+        <img id="questionImage" src="" style="display:none;">
+
         <div id="tileOverlay"></div>
 
     </div>
@@ -205,40 +207,40 @@
 
 
         // 問題開始
-        function startQuestion(){
+       function startQuestion(){
 
-            running = true;
+    running = true;
 
-            clearInterval(interval);
+    clearInterval(interval);
 
-            tileOverlay.innerHTML = "";
+    tileOverlay.innerHTML = "";
 
-            image.style.filter = "none";
-            image.style.transform = "scale(1)";
+    image.style.display = "block";
 
-            image.src = questions[currentQuestion].image;
+    image.style.filter = "none";
+    image.style.transform = "scale(1)";
 
+    image.src = questions[currentQuestion].image;
 
-            switch(selectedMode){
+    switch(selectedMode){
 
-                case 1:
-                    startMosaicMode();
-                    break;
+        case 1:
+            startMosaicMode();
+            break;
 
-                case 2:
-                    startZoomMode();
-                    break;
+        case 2:
+            startZoomMode();
+            break;
 
-                case 3:
-                    startTileMode();
-                    break;
+        case 3:
+            startTileMode();
+            break;
 
-                case 4:
-                    startBlurMode();
-                    break;
-            }
-        }
-
+        case 4:
+            startBlurMode();
+            break;
+    }
+}
 
 
         // =====================================

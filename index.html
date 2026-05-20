@@ -360,7 +360,7 @@
 
      function startBlurMode(){
 
-    let saturation = 0;
+    let saturation = -5;
 
     interval = setInterval(() => {
 
@@ -369,7 +369,7 @@
              saturate(${saturation}%)
              brightness(${50 + saturation / 2}%)`;
 
-        saturation += 5;
+        saturation += 4;
 
         if(saturation >= 100){
 

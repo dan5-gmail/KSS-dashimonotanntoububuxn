@@ -360,27 +360,26 @@
 
         function startBlurMode(){
 
-            let blur = 30;
+    let size = 5;
 
-            interval = setInterval(() => {
+    interval = setInterval(() => {
 
-                image.style.filter =
-                    `blur(${blur}px)`;
+        image.style.width = `${size}%`;
 
-                blur -= 1;
+        size += 3;
 
-                if(blur <= 0){
+        if(size >= 80){
 
-                    image.style.filter = "blur(0px)";
+            image.style.width = "80%";
 
-                    clearInterval(interval);
+            clearInterval(interval);
 
-                    running = false;
-                }
-
-            }, 120);
-
+            running = false;
         }
+
+    }, 120);
+
+}s
 
     </script>
 

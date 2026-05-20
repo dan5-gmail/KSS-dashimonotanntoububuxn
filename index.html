@@ -358,19 +358,23 @@
         // 4. 鮮明化
         // =====================================
 
-        function startBlurMode(){
+     function startBlurMode(){
 
-    let size = 5;
-
+    let saturation = 0;
+s
     interval = setInterval(() => {
 
-        image.style.width = `${size}%`;
+        image.style.filter =
+            `grayscale(${100 - saturation}%)
+             saturate(${saturation}%)
+             brightness(${50 + saturation / 2}%)`;
 
-        size += 3;
+        saturation += 5;
 
-        if(size >= 80){
+        if(saturation >= 100){
 
-            image.style.width = "80%";
+            image.style.filter =
+                "grayscale(0%) saturate(100%) brightness(100%)";
 
             clearInterval(interval);
 
@@ -379,8 +383,7 @@
 
     }, 120);
 
-}s
-
+}
     </script>
 
 </body>

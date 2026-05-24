@@ -213,7 +213,9 @@
             // Nキーで次の問題
             if(e.key === "n"){
 
+                if(!running){
                 nextQuestion();
+                }
             }
 
         });
@@ -233,28 +235,37 @@
 
             image.style.display = "block";
 
-            image.style.filter = "none";
-            image.style.transform = "scale(1)";
-
             // 現在の問題画像へ変更
             image.src = questions[currentQuestion].image;
+
+            // 初期化
+            
+            image.style.filter = "none";
+            image.style.transform = "scale(1)";
 
 
             switch(selectedMode){
 
                 case 1:
+
+                    image.style.filter = "blur(30px)";
                     startMosaicMode();
                     break;
 
                 case 2:
+                    
+                    image.style.transform = "scale(7)";
                     startZoomMode();
                     break;
 
                 case 3:
+                    
                     startTileMode();
                     break;
 
                 case 4:
+                    
+                    image.style.filter = "grayscale(100%) saturate(0%) brightness";
                     startBlurMode();
                     break;
             }

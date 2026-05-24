@@ -122,11 +122,7 @@
 
     <div id="gameArea" style="display:none;">
 
-        <img id="questionImage" src="q1.png">
-
-        
-        <img id="questionImage" src="q2.png">
-
+        <!-- 画像は1枚だけ！！！ -->
         <img id="questionImage" src="" style="display:none;">
 
         <div id="tileOverlay"></div>
@@ -142,17 +138,16 @@
         const tileOverlay = document.getElementById("tileOverlay");
 
 
+        // =====================================
         // 問題一覧
+        // =====================================
+
         const questions = [
-            {
-                image:"q1.png"
-            },
-            {
-                image:"q2.png"
-            },
-            {
-                image:"q3.png"
-            }
+
+            { image:"q1.png" },
+            { image:"q2.png" },
+            { image:"q3.png" }
+
         ];
 
 
@@ -162,7 +157,10 @@
         let interval;
 
 
+        // =====================================
         // モード名
+        // =====================================
+
         const modeNames = {
 
             1:"モザイク解除",
@@ -173,7 +171,10 @@
         };
 
 
+        // =====================================
         // スタートボタン
+        // =====================================
+
         startButton.addEventListener("click", () => {
 
             gameArea.style.display = "flex";
@@ -183,9 +184,11 @@
         });
 
 
+        // =====================================
         // キー入力
-        document.addEventListener("keydown", (e) => {
+        // =====================================
 
+        document.addEventListener("keydown", (e) => {
 
             // モード選択
             if(e.key >= "1" && e.key <= "4"){
@@ -206,44 +209,74 @@
                 }
             }
 
+
+            // Nキーで次の問題
+            if(e.key === "n"){
+
+                nextQuestion();
+            }
+
         });
 
 
+        // =====================================
         // 問題開始
-       function startQuestion(){
+        // =====================================
 
-    running = true;
+        function startQuestion(){
 
-    clearInterval(interval);
+            running = true;
 
-    tileOverlay.innerHTML = "";
+            clearInterval(interval);
 
-    image.style.display = "block";
+            tileOverlay.innerHTML = "";
 
-    image.style.filter = "none";
-    image.style.transform = "scale(1)";
+            image.style.display = "block";
 
-    image.src = questions[currentQuestion].image;
+            image.style.filter = "none";
+            image.style.transform = "scale(1)";
 
-    switch(selectedMode){
+            // 現在の問題画像へ変更
+            image.src = questions[currentQuestion].image;
 
-        case 1:
-            startMosaicMode();
-            break;
 
-        case 2:
-            startZoomMode();
-            break;
+            switch(selectedMode){
 
-        case 3:
-            startTileMode();
-            break;
+                case 1:
+                    startMosaicMode();
+                    break;
 
-        case 4:
-            startBlurMode();
-            break;
-    }
-}
+                case 2:
+                    startZoomMode();
+                    break;
+
+                case 3:
+                    startTileMode();
+                    break;
+
+                case 4:
+                    startBlurMode();
+                    break;
+            }
+        }
+
+
+        // =====================================
+        // 次の問題
+        // =====================================
+
+        function nextQuestion(){
+
+            currentQuestion++;
+
+            // 最後まで行ったら最初へ戻る
+            if(currentQuestion >= questions.length){
+
+                currentQuestion = 0;
+            }
+
+            image.src = questions[currentQuestion].image;
+        }
 
 
         // =====================================
@@ -252,11 +285,12 @@
 
         function startMosaicMode(){
 
-         let blur = 30;
+            let blur = 30;
 
             interval = setInterval(() => {
 
-                image.style.filter = `blur(${blur}px)`;
+                image.style.filter =
+                    `blur(${blur}px)`;
 
                 blur -= 0.8;
 
@@ -268,9 +302,9 @@
 
                     running = false;
                 }
+
             }, 180);
         }
-
 
 
         // =====================================
@@ -286,7 +320,7 @@
                 image.style.transform =
                     `scale(${scale})`;
 
-                scale -= 0.1;
+                scale -= 0.08;
 
                 if(scale <= 1){
 
@@ -297,9 +331,8 @@
                     running = false;
                 }
 
-            }, 120);
+            }, 150);
         }
-
 
 
         // =====================================
@@ -357,42 +390,38 @@
         }
 
 
-
         // =====================================
         // 4. 鮮明化
         // =====================================
 
-     function startBlurMode(){
+        function startBlurMode(){
 
-    let saturation = 0;
+            let saturation = 0;
 
-    interval = setInterval(() => {
+            interval = setInterval(() => {
 
-        image.style.filter =
-            `grayscale(${100 - saturation}%)
-             saturate(${saturation}%)
-             brightness(${50 + saturation / 2}%)`;
+                image.style.filter =
+                    `grayscale(${100 - saturation}%)
+                     saturate(${saturation}%)
+                     brightness(${50 + saturation / 2}%)`;
 
-        saturation += 2;
+                saturation += 2;
 
-        if(saturation >= 100){
+                if(saturation >= 100){
 
-            image.style.filter =
-                "grayscale(0%) saturate(100%) brightness(100%)";
+                    image.style.filter =
+                        "grayscale(0%) saturate(100%) brightness(100%)";
 
-            clearInterval(interval);
+                    clearInterval(interval);
 
-            running = false;
+                    running = false;
+                }
+
+            }, 120);
+
         }
 
-    }, 120);
-
-}
     </script>
 
 </body>
 </html>
-
-<img src ="q1.png">
-
-<img src ="q2.png">

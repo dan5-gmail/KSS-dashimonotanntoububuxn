@@ -108,11 +108,12 @@
 
 <body>
 
-    <h1>KSF 仮</h1>
+    <h1 id="title">KSF 仮</h1>
 
     <div id="info">
         1〜4キー = モード選択 → Space = 開始<br>
-        Cキー = 背景変更
+        Cキー = 背景変更<br>
+        Hキー = UI表示切替
     </div>
 
     <div id="modeDisplay">
@@ -139,6 +140,16 @@
         const startButton = document.getElementById("startButton");
         const tileOverlay = document.getElementById("tileOverlay");
 
+        const info = document.getElementById("info");
+        const title = document.getElementById("title");
+
+
+        // =====================================
+        // UI表示状態
+        // =====================================
+
+        let uiVisible = true;
+
 
         // =====================================
         // 背景モード
@@ -154,7 +165,7 @@
 
             // 黄
             {
-                color:"#c7b53e",
+                color:"yellow",
                 image:"none"
             },
 
@@ -188,9 +199,8 @@
             { image:"q1.png" },
             { image:"q2.png" },
             { image:"q3.png" },
-            { image:"q4.PNG" }
-
-
+            
+            { image:"q4.png" }
 
         ];
 
@@ -271,7 +281,6 @@
 
                 bgIndex++;
 
-                // 4回目以降でリセット
                 if(bgIndex >= bgModes.length){
 
                     bgIndex = 0;
@@ -285,6 +294,29 @@
 
                 document.body.style.backgroundSize =
                     "80px 40px";
+            }
+
+
+            // =====================================
+            // HキーでUI表示切替
+            // =====================================
+
+            if(e.key === "h"){
+
+                uiVisible = !uiVisible;
+
+                if(uiVisible){
+
+                    info.style.display = "block";
+                    modeDisplay.style.display = "block";
+                    title.style.display = "block";
+
+                }else{
+
+                    info.style.display = "none";
+                    modeDisplay.style.display = "none";
+                    title.style.display = "none";
+                }
             }
 
         });

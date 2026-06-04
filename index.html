@@ -29,6 +29,7 @@
             font-size:24px;
             margin-top:10px;
             color:#ccc;
+            line-height:1.7;
         }
 
         #gameArea{
@@ -112,8 +113,10 @@
 
     <div id="info">
         1〜4キー = モード選択 → Space = 開始<br>
+        Nキー = 次の問題<br>
         Cキー = 背景変更<br>
-        Hキー = UI表示切替
+        Hキー = UI表示切替<br>
+        Fキー = 全画面
     </div>
 
     <div id="modeDisplay">
@@ -199,8 +202,9 @@
             { image:"q1.png" },
             { image:"q2.png" },
             { image:"q3.png" },
+            { image:"q4.png" },
+            { image:"q5.png" }
             
-            { image:"q4.png" }
 
         ];
 
@@ -244,7 +248,10 @@
 
         document.addEventListener("keydown", (e) => {
 
+            // =====================================
             // モード選択
+            // =====================================
+
             if(e.key >= "1" && e.key <= "4"){
 
                 selectedMode = Number(e.key);
@@ -254,7 +261,10 @@
             }
 
 
+            // =====================================
             // Spaceで開始
+            // =====================================
+
             if(e.code === "Space"){
 
                 if(selectedMode !== 0 && !running){
@@ -264,10 +274,14 @@
             }
 
 
+            // =====================================
             // Nキーで次の問題
+            // =====================================
+
             if(e.key === "n"){
 
                 if(!running){
+
                     nextQuestion();
                 }
             }
@@ -316,6 +330,23 @@
                     info.style.display = "none";
                     modeDisplay.style.display = "none";
                     title.style.display = "none";
+                }
+            }
+
+
+            // =====================================
+            // Fキーで全画面切替
+            // =====================================
+
+            if(e.key === "f"){
+
+                if(!document.fullscreenElement){
+
+                    document.documentElement.requestFullscreen();
+
+                }else{
+
+                    document.exitFullscreen();
                 }
             }
 

@@ -113,6 +113,7 @@
 
     <div id="info">
         1〜4キー = モード選択 → Space = 開始<br>
+        Shift = 一時停止 / 再開<br>
         Nキー = 次の問題<br>
         Cキー = 背景変更<br>
         Hキー = UI表示切替<br>
@@ -155,30 +156,33 @@
 
 
         // =====================================
+        // 一時停止状態
+        // =====================================
+
+        let paused = false;
+
+
+        // =====================================
         // 背景モード
         // =====================================
 
         const bgModes = [
 
-            // 赤
             {
                 color:"#cc3031",
                 image:"none"
             },
 
-            // 黄
             {
                 color:"yellow",
                 image:"none"
             },
 
-            // 黒
             {
                 color:"black",
                 image:"none"
             },
 
-            // 煉瓦
             {
                 color:"#5a1f1f",
 
@@ -209,8 +213,6 @@
             { image:"q8.png" },
             { image:"q9.png" },
             { image:"q10.png" }
-            
-            
 
         ];
 
@@ -276,6 +278,19 @@
                 if(selectedMode !== 0 && !running){
 
                     startQuestion();
+                }
+            }
+
+
+            // =====================================
+            // Shiftで停止 / 再開
+            // =====================================
+
+            if(e.key === "Shift"){
+
+                if(running){
+
+                    paused = !paused;
                 }
             }
 
@@ -366,6 +381,7 @@
         function startQuestion(){
 
             running = true;
+            paused = false;
 
             clearInterval(interval);
 
@@ -388,18 +404,18 @@
                     break;
 
                 case 2:
-                    
+
                     image.style.transform = "scale(7)";
                     startZoomMode();
                     break;
 
                 case 3:
-                    
+
                     startTileMode();
                     break;
 
                 case 4:
-                    
+
                     image.style.filter =
                         "grayscale(100%) saturate(0%) brightness(50%)";
 
@@ -436,6 +452,8 @@
 
             interval = setInterval(() => {
 
+                if(paused) return;
+
                 image.style.filter =
                     `blur(${blur}px)`;
 
@@ -463,6 +481,8 @@
             let scale = 7;
 
             interval = setInterval(() => {
+
+                if(paused) return;
 
                 image.style.transform =
                     `scale(${scale})`;
@@ -515,6 +535,8 @@
 
             interval = setInterval(() => {
 
+                if(paused) return;
+
                 if(tiles.length <= 0){
 
                     clearInterval(interval);
@@ -546,6 +568,8 @@
             let saturation = 0;
 
             interval = setInterval(() => {
+
+                if(paused) return;
 
                 image.style.filter =
                     `grayscale(${100 - saturation}%)

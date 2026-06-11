@@ -325,19 +325,34 @@
                 }
             }
 
+// =====================================
+// Shiftで停止 / 再開 + 画像非表示
+// =====================================
 
-            // =====================================
-            // Shiftで停止 / 再開
-            // =====================================
+if(e.key === "Shift"){
 
-            if(e.key === "Shift"){
+    if(running){
 
-                if(running){
+        paused = !paused;
 
-                    paused = !paused;
-                }
-            }
+        if(paused){
 
+            // 画像を隠す
+            image.style.visibility = "hidden";
+
+            // タイルモード用
+            tileOverlay.style.visibility = "hidden";
+
+        }else{
+
+            // 画像を再表示
+            image.style.visibility = "visible";
+
+            // タイルモード用
+            tileOverlay.style.visibility = "visible";
+        }
+    }
+}
 
             // =====================================
             // Nキーで次の問題
@@ -424,8 +439,11 @@
 
         function startQuestion(){
 
-            running = true;
-            paused = false;
+    running = true;
+    paused = false;
+
+    image.style.visibility = "visible";
+    tileOverlay.style.visibility = "visible";
 
             clearInterval(interval);
 

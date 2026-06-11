@@ -182,7 +182,7 @@
             },
 
             {
-                color:"cfc541",
+                color:"#cfc541",
                 image:"none"
             },
 
@@ -233,8 +233,7 @@ for(let i = 67; i <= 100; i++){
 // 難易度
 // =====================================
 
-let selectedDifficulty = 1;
-
+let selectedDifficulty = 1; //難易度
 
 // =====================================
 // 連続重複防止
@@ -265,9 +264,9 @@ function getRandomQuestion(){
 
     lastQuestion = imageName;
 
-    return imageName;
-　　}let currentQuestion = 0;
-        let selectedDifficulty = 1;  //難易度
+    return imageName; 
+}
+        let currentQuestion = 0;
         let selectedMode = 0;
         let running = false;
         let interval;
@@ -344,12 +343,7 @@ if(e.key === "7"){
 
                 modeDisplay.textContent =
                     "モード：" + modeNames[selectedMode];
-                <div id="difficultyDisplay">
-    難易度：1
-</div<div id="difficultyDisplay">
-    難易度：1
-</div
-            }
+                    }
 
 
             // =====================================

@@ -64,6 +64,30 @@
             pointer-events:none;
         }
 
+        #questionText{
+
+    position:absolute;
+
+    top:50%;
+    left:50%;
+
+    transform:translate(-50%,-50%);
+
+    font-size:72px;
+    font-weight:bold;
+
+    color:white;
+
+    text-shadow:
+        0 0 10px black,
+        0 0 20px black,
+        0 0 30px black;
+
+    display:none;
+
+    z-index:100;
+}
+
         .tile{
             background:#111;
             border:1px solid #222;
@@ -135,6 +159,9 @@
     <div id="gameArea" style="display:none;">
 
         <img id="questionImage" src="" style="display:none;">
+        <div id="questionText">
+    WHAT IS THIS?
+</div>
 
         <div id="tileOverlay"></div>
 
@@ -154,6 +181,9 @@
 
         const info = document.getElementById("info");
         const title = document.getElementById("title");
+
+        const questionText =
+            document.getElementById("questionText");
 
 
         // =====================================
@@ -370,20 +400,20 @@ if(e.key === "Shift"){
 
         if(paused){
 
-            // 画像を隠す
-            image.style.visibility = "hidden";
+               image.style.visibility = "hidden";
 
-            // タイルモード用
-            tileOverlay.style.visibility = "hidden";
+              tileOverlay.style.visibility = "hidden";
+ 
+              questionText.style.display = "block";
 
-        }else{
+         }else{
 
-            // 画像を再表示
             image.style.visibility = "visible";
 
-            // タイルモード用
             tileOverlay.style.visibility = "visible";
-        }
+
+            questionText.style.display = "none";  
+       }
     }
 }
 
@@ -475,6 +505,8 @@ if(e.key === "Shift"){
     running = true;
     paused = false;
 
+    questionText.style.display = "none";
+
     image.style.visibility = "visible";
     tileOverlay.style.visibility = "visible";
 
@@ -530,6 +562,8 @@ if(e.key === "Shift"){
 
          image.style.visibility = "visible";
          tileOverlay.style.visibility = "visible";
+
+         questionText.style.display = "none";
 }
 
         // =====================================

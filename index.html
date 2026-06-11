@@ -88,6 +88,30 @@
     z-index:100;
 }
 
+        #answerText{
+
+    position:absolute;
+
+    bottom:50px;
+    left:50%;
+
+    transform:translateX(-50%);
+
+    font-size:48px;
+    font-weight:bold;
+
+    color:yellow;
+
+    text-shadow:
+        0 0 10px black,
+        0 0 20px black;
+
+    display:none;
+
+    z-index:100;
+}
+        
+
         .tile{
             background:#111;
             border:1px solid #222;
@@ -163,6 +187,8 @@
     WHAT IS THIS?
 </div>
 
+        <div id="answerText"></div> <!--> 追加　<1-->   
+
         <div id="tileOverlay"></div>
 
     </div>
@@ -184,6 +210,10 @@
 
         const questionText =
             document.getElementById("questionText");
+
+        const answerText =
+    document.getElementById("answerText");
+
 
 
         // =====================================
@@ -242,6 +272,14 @@ const questions = {
     2: [],
     3: []
 };
+        const answers = {
+
+    "q1.PNG": "東京タワー",
+    "q2.PNG": "富士山",
+    "q3.PNG": "東京スカイツリー",
+    "q4.PNG": 
+
+};
 
 // q1.png ～ q33.png
 for(let i = 1; i <= 57; i++){
@@ -269,7 +307,11 @@ let selectedDifficulty = 1; //難易度
 // 連続重複防止
 // =====================================
 
-let lastQuestion = "";
+        let lastQuestion = "";
+// 現在表示中の画像
+let currentImage = "";
+
+let currentAnswer = "";
 
 
 // =====================================
@@ -293,6 +335,9 @@ function getRandomQuestion(){
     );
 
     lastQuestion = imageName;
+
+    currentAnswer =
+    imageName.replace(".png", "");
 
     return imageName; 
 }
@@ -493,7 +538,19 @@ if(e.key === "Shift"){
                 }
             }
 
-        });
+            //==================
+            //Aで回答表示
+            //==================
+
+            if(e.key === "a"){
+
+    answerText.textContent =
+        "答え : " +
+        (answers[currentImage] || "未登録");
+
+    answerText.style.display =
+        "block";
+}
 
 
         // =====================================
@@ -516,7 +573,11 @@ if(e.key === "Shift"){
 
             image.style.display = "block";
 
-            image.src = getRandomQuestion();
+currentImage = getRandomQuestion();
+
+image.src = currentImage;
+
+image.style.filter = "none";
 
             image.style.filter = "none";
             image.style.transform = "scale(1)";
@@ -558,8 +619,12 @@ if(e.key === "Shift"){
 
         function nextQuestion(){
 
-         image.src = getRandomQuestion();
+            currentImage = getRandomQuestion();
 
+            image.src = currentImage;
+
+            answerText.style.display = "none";
+            
          image.style.visibility = "visible";
          tileOverlay.style.visibility = "visible";
 

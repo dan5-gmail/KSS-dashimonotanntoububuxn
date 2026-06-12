@@ -579,7 +579,7 @@ if(e.key === "Shift"){
             // =====================================
 
     if(e.key === "n"){
-
+        
     if(!running){
 
         answerMode = !answerMode;
@@ -670,12 +670,14 @@ if(e.key === "Shift"){
 
             if(e.key === "a"){
 
-    answerText.textContent =
-        "答え : " +
-        (answers[currentImage] || "未登録");
+    if(answerMode){
 
-    answerText.style.display =
-        "block";
+        answerText.textContent =
+            "答え : " +
+            (answers[currentImage] || "未登録");
+
+        answerText.style.display = "block";
+    }
 }
 
 
@@ -744,6 +746,7 @@ image.style.filter = "none";
         // =====================================
 
         function nextQuestion(){
+            
 
             currentImage = getRandomQuestion();
 
@@ -755,6 +758,8 @@ image.style.filter = "none";
          tileOverlay.style.visibility = "visible";
 
          questionText.style.display = "none";
+
+            answerMode = false;
 }
 
         // =====================================

@@ -166,6 +166,7 @@
         Cキー = 背景変更<br>
         Hキー = UI表示切替<br>
         Fキー = 全画面
+        Aキー = 回答表示  ※Shiftが押してある状態のみ可
     </div>
 
     <div id="modeDisplay">
@@ -529,13 +530,18 @@ if(e.key === "7"){
             // Spaceで開始
             // =====================================
 
-            if(e.code === "Space"){
+            startButton.addEventListener("click", () => {
 
-                if(selectedMode !== 0 && !running){
+            gameArea.style.display = "flex";
 
-                    startQuestion();
-                }
-            }
+            startButton.style.display = "none";
+
+            currentImage = getRandomQuestion();
+            image.src = currentImage;
+
+            startQuestion();
+
+});
 
 // =====================================
 // Shiftで停止 / 再開 + 画像非表示

@@ -578,13 +578,27 @@ if(e.key === "Shift"){
             // Nキーで次の問題
             // =====================================
 
-            if(e.key === "n"){
+    if(e.key === "n"){
 
-                if(!running){
+    if(!running){
 
-                    nextQuestion();
-                }
-            }
+        answerMode = !answerMode;
+
+        if(answerMode){
+
+            image.style.visibility = "hidden";
+            tileOverlay.style.visibility = "hidden";
+
+            questionText.style.display = "block";
+
+            answerText.style.display = "none";
+
+        }else{
+
+            nextQuestion();
+        }
+    }
+}
 
 
             // =====================================
